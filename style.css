@@ -1,49 +1,347 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap');
 
+
+/* =========================
+   RESET
+========================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Playfair';
+    font-family: 'Playfair', serif;
 }
 
+
+/* =========================
+   BODY
+========================= */
+
 body {
-    background-color: lightgoldenrodyellow;
+    background-color: #F7F3E8;
+
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    overflow-x: hidden;
 }
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
 
 .info {
+    width: 95%;
+
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
-    /* border: 1px solid black; */
-    width: 75vw;
-    height: 30vh;
+    justify-content: space-between;
+
+    gap: 5vw;
 }
+
+
+/* =========================
+   PROFILE IMAGE
+========================= */
+
+.profile-wrapper {
+    position: relative;
+
+    width: 700px;
+
+    padding: 3px;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+    user-select: none;
+
+    box-shadow: 0 0 10px rgba(176, 141, 87, 0.5);
+
+    transition: box-shadow 0.3s ease-out;
+}
+
+
+/* Animated border */
+
+.profile-wrapper::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -100%;
+
+    background: conic-gradient(from 0deg,
+
+            transparent 0deg,
+            transparent 350deg,
+
+            #B08D57 355deg,
+            #B08D57 360deg);
+
+    animation: borderRotate 2.5s linear infinite;
+}
+
+
+/* Image */
 
 .profile {
-    width: 30vh;
-    height: 100%;
-    border: 5px solid darkslategray;
-    box-sizing: content-box;
-    border-radius: 50%;
+    position: relative;
+
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    border-radius: 9px;
+
+    z-index: 1;
+
+    transition:
+        transform 0.3s ease-out;
 }
 
-.profile:hover {
-    transform: scale(1.05);
 
+/* Image hover */
+
+.profile-wrapper:hover {
+    box-shadow: 0 0 18px rgba(154, 123, 76, 0.55);
 }
+
+.profile-wrapper:hover .profile {
+    transform: scale(1.005);
+}
+
+
+/* Border animation */
+
+@keyframes borderRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================
+   RIGHT SIDE
+========================= */
+
+.right {
+    cursor: pointer;
+
+    margin-right: 6vw;
+
+    white-space: nowrap;
+}
+
+
+/* =========================
+   HEADING
+========================= */
 
 .right h1 {
     margin-block: 20px;
-    font-size: 3rem;
+
+    font-size: 3.5rem;
+
+    color: #171717;
+
+    transition: color 0.2s ease-out;
 }
 
+
+/* =========================
+   PARAGRAPH
+========================= */
+
 .right p {
-    font-size: 2rem;
-    color: darkslategray;
+    font-size: 2.2rem;
+
+    color: #171717;
+
+    transition: color 0.2s ease-out;
+}
+
+
+/* =========================
+   TEXT HOVER
+========================= */
+
+/* Normal text becomes blue */
+
+.right h1:hover,
+.right p:hover {
+    color: #243B53;
+}
+
+
+/* Span becomes gold */
+
+.right h1:hover span,
+.right p:hover span {
+    color: #B08D57;
+}
+
+
+/* =========================
+   SPAN
+========================= */
+
+span {
+    font-weight: bold;
+
+    color: #243B53;
+
+    transition: color 0.2s ease-out;
+}
+
+
+/* =========================
+   NAME
+   Animated underline
+========================= */
+
+.name {
+    position: relative;
+
+    display: inline-block;
+}
+
+
+/* Moving underline */
+
+.name::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -6px;
+
+    width: 20px;
+    height: 3px;
+
+    background-color: #B08D57;
+
+    border-radius: 10px;
+
+    animation: underlineMove 2s linear infinite;
+}
+
+
+/* Underline moves left → right */
+
+@keyframes underlineMove {
+
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: calc(100% - 20px);
+    }
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1200px) {
+
+    .info {
+        width: 90%;
+    }
+
+    .profile-wrapper {
+        width: 55vw;
+    }
+
+    .right {
+        margin-right: 2vw;
+    }
+
+    .right h1 {
+        font-size: 3rem;
+    }
+
+    .right p {
+        font-size: 1.9rem;
+    }
+}
+
+
+@media (max-width: 900px) {
+
+    .info {
+        flex-direction: column;
+
+        justify-content: center;
+
+        text-align: center;
+
+        gap: 40px;
+    }
+
+    .profile-wrapper {
+        width: min(700px, 85vw);
+    }
+
+    .right {
+        margin-right: 0;
+    }
+
+    .right h1 {
+        font-size: 2.8rem;
+    }
+
+    .right p {
+        font-size: 1.8rem;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .profile-wrapper {
+        width: 90vw;
+    }
+
+    .right h1 {
+        font-size: 2rem;
+    }
+
+    .right p {
+        font-size: 1.4rem;
+    }
+
+    .name::after {
+        width: 15px;
+        height: 2px;
+
+        bottom: -4px;
+    }
+
+    @keyframes underlineMove {
+
+        0% {
+            left: 0;
+        }
+
+        100% {
+            left: calc(100% - 15px);
+        }
+    }
 }
