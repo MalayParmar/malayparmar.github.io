@@ -345,3 +345,61 @@ span {
         }
     }
 }
+
+/* =========================
+   MOBILE — LOCK TO VIEWPORT
+   (append only, desktop untouched)
+========================= */
+
+@media (max-width: 900px) {
+
+    html, body {
+        height: 100dvh;      /* dvh handles mobile browser UI bars better than vh */
+        min-height: unset;
+        overflow: hidden;
+    }
+
+    .info {
+        height: 100dvh;
+        max-height: 100dvh;
+        gap: 3vh;
+        padding: 2vh 0;
+    }
+
+    /* Size the image off viewport HEIGHT, not width,
+       so it can never push the layout past 100dvh */
+    .profile-wrapper {
+        width: auto;
+        height: 55vh;
+        max-width: 90vw;
+    }
+
+    .profile {
+        width: auto;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .right h1 {
+        margin-block: 1.5vh;
+        font-size: clamp(1.4rem, 5vw, 2.2rem);
+    }
+
+    .right p {
+        font-size: clamp(1rem, 3.5vw, 1.3rem);
+    }
+}
+
+@media (max-width: 600px) {
+    .profile-wrapper {
+        height: 48vh;
+    }
+
+    .right h1 {
+        font-size: clamp(1.2rem, 6vw, 1.8rem);
+    }
+
+    .right p {
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+    }
+}
